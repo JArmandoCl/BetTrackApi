@@ -27,14 +27,14 @@ namespace BetTrackApi.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/User
+        // GET: api/Usuario
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DtoUsuario>>> ObtenerUsuarios()
         {
             return _mapper.Map<List<DtoUsuario>>(await _context.Usuarios.ToListAsync());
         }
 
-        // GET: api/User/5
+        // GET: api/Usuario/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DtoUsuario>> ObtenerUsuario(long id)
         {
@@ -49,7 +49,7 @@ namespace BetTrackApi.Controllers
             return user;
         }
 
-        // PUT: api/User/5
+        // PUT: api/Usuario/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> ActualizarUsuario(long id, DtoUsuario usuario)
@@ -80,7 +80,7 @@ namespace BetTrackApi.Controllers
             return NoContent();
         }
 
-        // POST: api/User
+        // POST: api/Usuario
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [AllowAnonymous]
@@ -89,6 +89,7 @@ namespace BetTrackApi.Controllers
             Usuario userContext = _mapper.Map<Usuario>(usuario);
             string hashedPassword = PasswordHasher.HashPassword(usuario.Contrasenia);
             userContext.Contrasenia = hashedPassword;
+            userContext.FechaRegistro = Miscellaneous.ObtenerFechaActual();
             _context.Usuarios.Add(userContext);
             try
             {
@@ -127,7 +128,7 @@ namespace BetTrackApi.Controllers
             return seguidor;
         }
 
-        // DELETE: api/User/5
+        // DELETE: api/Usuario/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> EliminarUsuario(long id)
         {
