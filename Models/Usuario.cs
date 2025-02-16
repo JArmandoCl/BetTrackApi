@@ -40,6 +40,13 @@ public partial class Usuario
     [Column(TypeName = "datetime")]
     public DateTime FechaRegistro { get; set; }
 
+    [Column(TypeName = "datetime")]
+    public DateTime? ResetTokenExpiracion { get; set; }
+
+    [StringLength(255)]
+    [Unicode(false)]
+    public string? ResetToken { get; set; }
+
     [ForeignKey("EstatusUsuarioId")]
     [InverseProperty("Usuarios")]
     public virtual EstatusUsuario EstatusUsuario { get; set; } = null!;

@@ -1,4 +1,6 @@
-﻿namespace BetTrackApi.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BetTrackApi.Dtos
 {
     public class DtoEstatusUsuario
     {
@@ -51,4 +53,21 @@
         public int TipoApuestaId { get; set; }
         public string Nombre { get; set; } = "";
     }
+    #region Extras
+    public class DtoBetMail
+    {
+        public string To { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+    }
+    public class DtoReestablecerContrasenia
+    {
+        public string Email { get; set; }
+        public string Token { get; set; }
+        [Required]
+        public string NewPassword { get; set; }
+        [Required]
+        public string NewConfirmedPassword { get; set; }
+    }
+    #endregion
 }
