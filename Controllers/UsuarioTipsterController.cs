@@ -27,11 +27,11 @@ namespace BetTrackApi.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/UsuarioTipster
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<DtoUsuarioTipster>>> ObtenerUsuarioTipsters()
+        // GET: api/UsuarioTipster/ObtenerUsuarioTipsters/1
+        [HttpGet("ObtenerUsuarioTipsters/{usuarioId}")]
+        public async Task<ActionResult<IEnumerable<DtoUsuarioTipster>>> ObtenerUsuarioTipsters(long usuarioId)
         {
-            return _mapper.Map<List<DtoUsuarioTipster>>(await _context.RelUsuarioTipsters.ToListAsync());
+            return _mapper.Map<List<DtoUsuarioTipster>>(await _context.RelUsuarioTipsters.Where(x=>x.UsuarioId==usuarioId).ToListAsync());
         }
 
         // GET: api/UsuarioTipster/5

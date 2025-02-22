@@ -29,10 +29,6 @@ public partial class Usuario
     [Unicode(false)]
     public string Nombre { get; set; } = null!;
 
-    [StringLength(50)]
-    [Unicode(false)]
-    public string Alias { get; set; } = null!;
-
     [StringLength(255)]
     [Unicode(false)]
     public string Pensamiento { get; set; } = null!;

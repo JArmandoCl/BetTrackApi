@@ -8,12 +8,14 @@
         public string Contrasenia { get; set; } = "";
         public string Nickname { get; set; } = "";
         public string Nombre { get; set; } = "";
-        public string Alias { get; set; } = "";
         public string Pensamiento { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
+        #region Extras
+        public string CurrentToken { get; set; }
+        #endregion
     }
 
-  public  class DtoSeguidor
+    public  class DtoSeguidor
     {
         public long SeguidorId { get; set; }
         public long UsuarioSeguidorId { get; set; }

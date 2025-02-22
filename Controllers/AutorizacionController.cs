@@ -41,11 +41,13 @@ namespace BetTrackApi.Controllers
                     {
                     new Claim(ClaimTypes.Name, request.Email)
                     }),
-                    Expires = DateTime.UtcNow.AddHours(5),
+                    Expires = DateTime.UtcNow.AddDays(30),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                return Ok(new { Token = tokenHandler.WriteToken(token) });
+                DtoUsuario dtoUsuario = _mapper.Map<DtoUsuario>(userMatched);
+                dtoUsuario.CurrentToken = tokenHandler.WriteToken(token);
+                return Ok(dtoUsuario);
             }
 
             return Unauthorized("Usuario o contraseña incorrectos");
