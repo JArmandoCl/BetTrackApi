@@ -31,6 +31,8 @@ public partial class BetTrackContext : DbContext
 
     public virtual DbSet<FormatosCuota> FormatosCuotas { get; set; }
 
+    public virtual DbSet<Moneda> Monedas { get; set; }
+
     public virtual DbSet<RelApuesta> RelApuestas { get; set; }
 
     public virtual DbSet<RelCategoriasUsuario> RelCategoriasUsuarios { get; set; }
@@ -61,7 +63,7 @@ public partial class BetTrackContext : DbContext
     {
         modelBuilder.Entity<Casino>(entity =>
         {
-            entity.HasKey(e => e.CasinoId).HasName("PK__Casinos__D0F8D6CD0D4186A5");
+            entity.HasKey(e => e.CasinoId).HasName("PK__Casinos__D0F8D6CDA9F8A7CC");
         });
 
         modelBuilder.Entity<Deporte>(entity =>
@@ -97,6 +99,11 @@ public partial class BetTrackContext : DbContext
         modelBuilder.Entity<FormatosCuota>(entity =>
         {
             entity.HasKey(e => e.FormatoCuotaId).HasName("PK__Formatos__2AB1FAE594BEA9FE");
+        });
+
+        modelBuilder.Entity<Moneda>(entity =>
+        {
+            entity.HasKey(e => e.MonedaId).HasName("PK__Monedas__CEEBACBE2CF70F59");
         });
 
         modelBuilder.Entity<RelApuesta>(entity =>
@@ -183,6 +190,8 @@ public partial class BetTrackContext : DbContext
             entity.HasOne(d => d.FormatoCuota).WithMany(p => p.RelUsuarioBankrolls)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__RelUsuari__Forma__1DD065E0");
+
+            entity.HasOne(d => d.Moneda).WithMany(p => p.RelUsuarioBankrolls).HasConstraintName("FK__RelUsuari__Moned__43F60EC8");
 
             entity.HasOne(d => d.TipoBankroll).WithMany(p => p.RelUsuarioBankrolls)
                 .OnDelete(DeleteBehavior.ClientSetNull)

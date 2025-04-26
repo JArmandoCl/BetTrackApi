@@ -26,24 +26,27 @@ namespace BetTrackApi.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/UsuarioBankroll
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<DtoUsuarioBankroll>>> ObtenerBankrollsUsuario()
+        // GET: api/UsuarioBankroll/ObtenerBankrollsUsuario/5
+        [HttpGet("ObtenerBankrollsUsuario/{usuarioId}")]
+        public async Task<ActionResult<IEnumerable<DtoUsuarioBankroll>>> ObtenerBankrollsUsuario(long usuarioId)
         {
-            return _mapper.Map<List<DtoUsuarioBankroll>>(await _context.RelUsuarioBankrolls.ToListAsync());
+            return _mapper.Map<List<DtoUsuarioBankroll>>(await _context.RelUsuarioBankrolls.Where(x=>x.UsuarioId==usuarioId).ToListAsync());
         }
 
         // GET: api/UsuarioBankroll/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DtoUsuarioBankroll>> ObtenerBankrollUsuario(long id)
         {
-            var relUsuarioBankroll = await _context.RelUsuarioBankrolls.FindAsync(id);
+            var relUsuarioBankroll = await _context.RelUsuarioBankrolls.Include(x=>x.TipoBankroll).Include(x=>x.FormatoCuota).Include(x=>x.Moneda).FirstOrDefaultAsync(x=>x.UsuarioBankrollId==id);
 
             if (relUsuarioBankroll == null)
             {
                 return NotFound();
             }
             DtoUsuarioBankroll usuarioBankroll = _mapper.Map<DtoUsuarioBankroll>(relUsuarioBankroll);
+            usuarioBankroll.TiposBankroll = _mapper.Map<List<DtoTipoBankroll>>(await _context.TiposBankrolls.ToListAsync());
+            usuarioBankroll.Monedas = _mapper.Map<List<DtoMoneda>>(await _context.Monedas.ToListAsync());
+            usuarioBankroll.FormatoCuotas = _mapper.Map<List<DtoFormatoCuota>>(await _context.FormatosCuotas.ToListAsync());
             return usuarioBankroll;
         }
 
@@ -56,7 +59,7 @@ namespace BetTrackApi.Controllers
             {
                 return BadRequest();
             }
-            RelCategoriasUsuario usuarioBankroll = _mapper.Map<RelCategoriasUsuario>(relUsuarioBankroll);
+            RelUsuarioBankroll usuarioBankroll = _mapper.Map<RelUsuarioBankroll>(relUsuarioBankroll);
 
             _context.Entry(usuarioBankroll).State = EntityState.Modified;
 
@@ -113,5 +116,25 @@ namespace BetTrackApi.Controllers
         {
             return _context.RelUsuarioBankrolls.Any(e => e.UsuarioBankrollId == id);
         }
+        #region Extras
+        // GET: api/UsuarioBankroll/FormatoCuota
+        [HttpGet("FormatoCuota")]
+        public async Task<ActionResult<IEnumerable<DtoFormatoCuota>>> FormatoCuota()
+        {
+            return _mapper.Map<List<DtoFormatoCuota>>(await _context.FormatosCuotas.ToListAsync());
+        }
+        // GET: api/UsuarioBankroll/TipoBankroll
+        [HttpGet("TipoBankroll")]
+        public async Task<ActionResult<IEnumerable<DtoTipoBankroll>>> TipoBankroll()
+        {
+            return _mapper.Map<List<DtoTipoBankroll>>(await _context.TiposBankrolls.ToListAsync());
+        }
+        // GET: api/UsuarioBankroll/Monedas
+        [HttpGet("Monedas")]
+        public async Task<ActionResult<IEnumerable<DtoMoneda>>> Monedas()
+        {
+            return _mapper.Map<List<DtoMoneda>>(await _context.Monedas.OrderBy(x=>x.Moneda1).ToListAsync());
+        }
+        #endregion
     }
 }

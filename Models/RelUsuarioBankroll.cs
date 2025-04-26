@@ -32,6 +32,8 @@ public partial class RelUsuarioBankroll
     [Column(TypeName = "datetime")]
     public DateTime FechaModificacion { get; set; }
 
+    public int? MonedaId { get; set; }
+
     [ForeignKey("EstatusBankrollId")]
     [InverseProperty("RelUsuarioBankrolls")]
     public virtual EstatusBankroll EstatusBankroll { get; set; } = null!;
@@ -39,6 +41,10 @@ public partial class RelUsuarioBankroll
     [ForeignKey("FormatoCuotaId")]
     [InverseProperty("RelUsuarioBankrolls")]
     public virtual FormatosCuota FormatoCuota { get; set; } = null!;
+
+    [ForeignKey("MonedaId")]
+    [InverseProperty("RelUsuarioBankrolls")]
+    public virtual Moneda? Moneda { get; set; }
 
     [InverseProperty("UsuarioBankroll")]
     public virtual ICollection<RelApuesta> RelApuesta { get; set; } = new List<RelApuesta>();

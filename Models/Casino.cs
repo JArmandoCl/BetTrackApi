@@ -15,7 +15,6 @@ public partial class Casino
     [Unicode(false)]
     public string Nombre { get; set; } = null!;
 
-    [StringLength(1)]
     [Unicode(false)]
     public string Icono { get; set; } = null!;
 }

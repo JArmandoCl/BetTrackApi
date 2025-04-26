@@ -53,6 +53,11 @@ namespace BetTrackApi.Dtos
         public int TipoApuestaId { get; set; }
         public string Nombre { get; set; } = "";
     }
+    public class DtoMoneda
+    {
+        public int MonedaId { get; set; }
+        public string Descripcion { get; set; } = "";
+    }
     #region Extras
     public class DtoBetMail
     {

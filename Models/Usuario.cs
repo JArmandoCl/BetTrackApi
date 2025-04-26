@@ -43,6 +43,9 @@ public partial class Usuario
     [Unicode(false)]
     public string? ResetToken { get; set; }
 
+    [Unicode(false)]
+    public string? FotoUsuario { get; set; }
+
     [ForeignKey("EstatusUsuarioId")]
     [InverseProperty("Usuarios")]
     public virtual EstatusUsuario EstatusUsuario { get; set; } = null!;

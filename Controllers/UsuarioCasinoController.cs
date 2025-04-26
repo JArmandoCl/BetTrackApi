@@ -15,17 +15,24 @@ namespace BetTrackApi.Controllers
         private readonly BetTrackContext _context;
         private readonly IMapper _mapper;
 
-        public UsuarioCasinoController(BetTrackContext context,IMapper mapper)
+        public UsuarioCasinoController(BetTrackContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
         // GET: api/UsuarioCasino
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<DtoUsuarioCasino>>> ObtenerUsuarioCasinos()
+        [HttpGet("ObtenerCasinosBetTrack")]
+        public async Task<ActionResult<IEnumerable<DtoCasino>>> ObtenerUsuarioCasinos()
         {
-            return _mapper.Map<List<DtoUsuarioCasino>>(await _context.RelUsuariosCasinos.ToListAsync());
+            return _mapper.Map<List<DtoCasino>>(await _context.Casinos.ToListAsync());
+        }
+
+        // GET: api/UsuarioCasino/ObtenerUsuarioCasinos/1
+        [HttpGet("ObtenerUsuarioCasinos/{usuarioId}")]
+        public async Task<ActionResult<IEnumerable<DtoUsuarioCasino>>> ObtenerUsuarioCasinos(long usuarioId)
+        {
+            return _mapper.Map<List<DtoUsuarioCasino>>(await _context.RelUsuariosCasinos.Where(x => x.UsuarioId == usuarioId && x.EstatusUsuarioCasinoId != 2).ToListAsync());
         }
 
         // GET: api/UsuarioCasino/5

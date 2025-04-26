@@ -11,5 +11,14 @@
         public int TipoBankrollId { get; set; }
         public DateTime FechaRegistro { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public int MonedaId { get; set; }
+        #region Extras
+        public DtoMoneda? Moneda { get; set; }
+        public DtoFormatoCuota? FormatoCuota { get; set; }
+        public DtoTipoBankroll? TipoBankroll  { get; set; }
+        public List<DtoTipoBankroll> TiposBankroll { get; set; }
+        public List<DtoFormatoCuota> FormatoCuotas { get; set; }
+        public List<DtoMoneda> Monedas { get; set; }
+        #endregion
     }
 }

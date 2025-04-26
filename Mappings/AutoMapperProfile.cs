@@ -27,6 +27,7 @@ namespace BetTrackApi.Mappings
             CreateMap<Deporte, DtoDeporte>().ReverseMap();
             CreateMap<EstatusApuesta, DtoEstatusApuesta>().ReverseMap();
             CreateMap<TiposApuesta, DtoTipoApuesta>().ReverseMap();
+            CreateMap<Moneda, DtoMoneda>().ReverseMap();
         }
     }
 }

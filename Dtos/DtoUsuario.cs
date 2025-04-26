@@ -10,6 +10,7 @@
         public string Nombre { get; set; } = "";
         public string Pensamiento { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
+        public string FotoUsuario { get; set; }
         #region Extras
         public string CurrentToken { get; set; }
         #endregion
