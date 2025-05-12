@@ -108,23 +108,27 @@ public partial class BetTrackContext : DbContext
 
         modelBuilder.Entity<RelApuesta>(entity =>
         {
-            entity.HasKey(e => e.ApuestaId).HasName("PK__RelApues__5F64724394B36584");
+            entity.HasKey(e => e.ApuestaId).HasName("PK__RelApues__5F647243BFDF78E1");
 
             entity.HasOne(d => d.CategoriaUsuario).WithMany(p => p.RelApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelApuest__Categ__284DF453");
+                .HasConstraintName("FK__RelApuest__Categ__65570293");
 
             entity.HasOne(d => d.TipoApuesta).WithMany(p => p.RelApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelApuest__TipoA__2665ABE1");
+                .HasConstraintName("FK__RelApuest__TipoA__627A95E8");
 
             entity.HasOne(d => d.UsuarioBankroll).WithMany(p => p.RelApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelApuest__Usuar__257187A8");
+                .HasConstraintName("FK__RelApuest__Usuar__618671AF");
+
+            entity.HasOne(d => d.UsuarioCasino).WithMany(p => p.RelApuesta)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__RelApuest__Usuar__6462DE5A");
 
             entity.HasOne(d => d.UsuarioTipster).WithMany(p => p.RelApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelApuest__Usuar__2759D01A");
+                .HasConstraintName("FK__RelApuest__Usuar__636EBA21");
         });
 
         modelBuilder.Entity<RelCategoriasUsuario>(entity =>
@@ -151,19 +155,19 @@ public partial class BetTrackContext : DbContext
 
         modelBuilder.Entity<RelDetallesApuesta>(entity =>
         {
-            entity.HasKey(e => e.DetalleApuestaId).HasName("PK__RelDetal__4FE5E008CADF7F4B");
+            entity.HasKey(e => e.DetalleApuestaId).HasName("PK__RelDetal__4FE5E00888459E8F");
 
             entity.HasOne(d => d.Apuesta).WithMany(p => p.RelDetallesApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelDetall__Apues__2B2A60FE");
+                .HasConstraintName("FK__RelDetall__Apues__68336F3E");
 
             entity.HasOne(d => d.Deporte).WithMany(p => p.RelDetallesApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelDetall__Depor__2C1E8537");
+                .HasConstraintName("FK__RelDetall__Depor__69279377");
 
             entity.HasOne(d => d.EstatusApuesta).WithMany(p => p.RelDetallesApuesta)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelDetall__Estat__2D12A970");
+                .HasConstraintName("FK__RelDetall__Estat__6A1BB7B0");
         });
 
         modelBuilder.Entity<RelSeguidore>(entity =>
@@ -213,17 +217,17 @@ public partial class BetTrackContext : DbContext
 
         modelBuilder.Entity<RelUsuariosCasino>(entity =>
         {
-            entity.HasKey(e => e.UsuarioCasinoId).HasName("PK__RelUsuar__DCCE427D181D8EA8");
+            entity.HasKey(e => e.UsuarioCasinoId).HasName("PK__RelUsuar__DCCE427D2C3C634E");
 
-            entity.Property(e => e.CasinoId).HasComputedColumnSql("((100)+(1))", false);
+            entity.HasOne(d => d.Casino).WithMany(p => p.RelUsuariosCasinos).HasConstraintName("FK__RelUsuari__Casin__5EAA0504");
 
             entity.HasOne(d => d.EstatusUsuarioCasino).WithMany(p => p.RelUsuariosCasinos)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelUsuari__Estat__190BB0C3");
+                .HasConstraintName("FK__RelUsuari__Estat__5DB5E0CB");
 
             entity.HasOne(d => d.Usuario).WithMany(p => p.RelUsuariosCasinos)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RelUsuari__Usuar__18178C8A");
+                .HasConstraintName("FK__RelUsuari__Usuar__5CC1BC92");
         });
 
         modelBuilder.Entity<TiposApuesta>(entity =>

@@ -42,6 +42,7 @@ namespace BetTrackApi.Dtos
         public long DeporteId { get; set; }
         public string NombreEsp { get; set; } = "";
         public string NombreIng { get; set; } = "";
+        public string Nombre { get; set; } = "";
     }
     public class DtoEstatusApuesta
     {

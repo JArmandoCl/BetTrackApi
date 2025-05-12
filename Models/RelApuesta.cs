@@ -19,6 +19,8 @@ public partial class RelApuesta
 
     public long CategoriaUsuarioId { get; set; }
 
+    public long UsuarioCasinoId { get; set; }
+
     [Column(TypeName = "datetime")]
     public DateTime Fecha { get; set; }
 
@@ -34,8 +36,6 @@ public partial class RelApuesta
 
     [Column(TypeName = "decimal(19, 2)")]
     public decimal Ganancia { get; set; }
-
-    public bool ApuestaEnVivo { get; set; }
 
     public bool EsApuestaGratuita { get; set; }
 
@@ -58,6 +58,10 @@ public partial class RelApuesta
     [ForeignKey("UsuarioBankrollId")]
     [InverseProperty("RelApuesta")]
     public virtual RelUsuarioBankroll UsuarioBankroll { get; set; } = null!;
+
+    [ForeignKey("UsuarioCasinoId")]
+    [InverseProperty("RelApuesta")]
+    public virtual RelUsuariosCasino UsuarioCasino { get; set; } = null!;
 
     [ForeignKey("UsuarioTipsterId")]
     [InverseProperty("RelApuesta")]

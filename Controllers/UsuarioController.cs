@@ -91,6 +91,14 @@ namespace BetTrackApi.Controllers
             string hashedPassword = PasswordHasher.HashPassword(usuario.Contrasenia);
             userContext.Contrasenia = hashedPassword;
             userContext.FechaRegistro = Miscellaneous.ObtenerFechaActual();
+            //Agregar una categoria general
+            userContext.RelCategoriasUsuarios.Add(new RelCategoriasUsuario
+            {
+                EstatusCategoriaId = 1,
+                Nombre = "General",
+                FechaRegistro = userContext.FechaRegistro,
+                FechaModificacion = userContext.FechaRegistro
+            });
             _context.Usuarios.Add(userContext);
             try
             {

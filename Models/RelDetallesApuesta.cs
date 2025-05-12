@@ -24,6 +24,10 @@ public partial class RelDetallesApuesta
     [Column(TypeName = "decimal(19, 2)")]
     public decimal Cuota { get; set; }
 
+    public bool PagoAnticipado { get; set; }
+
+    public bool ApuestaEnVivo { get; set; }
+
     [ForeignKey("ApuestaId")]
     [InverseProperty("RelDetallesApuesta")]
     public virtual RelApuesta Apuesta { get; set; } = null!;

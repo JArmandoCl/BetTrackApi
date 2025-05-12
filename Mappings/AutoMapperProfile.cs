@@ -11,6 +11,7 @@ namespace BetTrackApi.Mappings
             //Relaciones
             CreateMap<Usuario, DtoUsuario>().ReverseMap();
             CreateMap<RelApuesta, DtoApuesta>().ReverseMap();
+            CreateMap<RelDetallesApuesta, DtoDetalleApuesta>().ReverseMap();
             CreateMap<RelCategoriasUsuario, DtoCategoriaUsuario>().ReverseMap();
             CreateMap<RelDepositosRetiro, DtoDepositoRetiro>().ReverseMap();
             CreateMap<RelUsuarioBankroll, DtoUsuarioBankroll>().ReverseMap();

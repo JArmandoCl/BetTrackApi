@@ -27,10 +27,10 @@ namespace BetTrackApi.Controllers
         }
 
         // GET: api/CategoriaUsuario
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<DtoCategoriaUsuario>>> ObtenerCategoriasUsuarios()
+        [HttpGet("ObtenerCategoriasUsuarios/{usuarioId}")]
+        public async Task<ActionResult<IEnumerable<DtoCategoriaUsuario>>> ObtenerCategoriasUsuarios(long usuarioId)
         {
-            return _mapper.Map<List<DtoCategoriaUsuario>>(await _context.RelCategoriasUsuarios.ToListAsync());
+            return _mapper.Map<List<DtoCategoriaUsuario>>(await _context.RelCategoriasUsuarios.Where(x=>x.UsuarioId==usuarioId && x.EstatusCategoriaId!=2).ToListAsync());
         }
 
         // GET: api/CategoriaUsuario/5

@@ -21,17 +21,17 @@ namespace BetTrackApi.Controllers
 
         private readonly IMapper _mapper;
 
-        public ApuestaController(BetTrackContext context,IMapper mapper)
+        public ApuestaController(BetTrackContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
         // GET: api/Apuesta
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<DtoApuesta>>> ObtenerApuestas()
+        [HttpGet("ObtenerApuestas/{bankrollId}")]
+        public async Task<ActionResult<IEnumerable<DtoApuesta>>> ObtenerApuestas(long bankrollId)
         {
-            return _mapper.Map<List<DtoApuesta>>(await _context.RelApuestas.ToListAsync());
+            return _mapper.Map<List<DtoApuesta>>(await _context.RelApuestas.Where(x => x.UsuarioBankrollId == bankrollId).Include(x => x.RelDetallesApuesta).ToListAsync());
         }
 
         // GET: api/Apuesta/5
@@ -85,7 +85,7 @@ namespace BetTrackApi.Controllers
         public async Task<ActionResult<DtoApuesta>> RegistrarApuesta(DtoApuesta relApuesta)
         {
             RelApuesta apuesta = _mapper.Map<RelApuesta>(relApuesta);
-
+            apuesta.RelDetallesApuesta.Add(_mapper.Map<RelDetallesApuesta>(relApuesta.DetalleApuesta));
             _context.RelApuestas.Add(apuesta);
             await _context.SaveChangesAsync();
             relApuesta = _mapper.Map<DtoApuesta>(apuesta);

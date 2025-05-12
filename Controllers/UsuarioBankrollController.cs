@@ -116,25 +116,6 @@ namespace BetTrackApi.Controllers
         {
             return _context.RelUsuarioBankrolls.Any(e => e.UsuarioBankrollId == id);
         }
-        #region Extras
-        // GET: api/UsuarioBankroll/FormatoCuota
-        [HttpGet("FormatoCuota")]
-        public async Task<ActionResult<IEnumerable<DtoFormatoCuota>>> FormatoCuota()
-        {
-            return _mapper.Map<List<DtoFormatoCuota>>(await _context.FormatosCuotas.ToListAsync());
-        }
-        // GET: api/UsuarioBankroll/TipoBankroll
-        [HttpGet("TipoBankroll")]
-        public async Task<ActionResult<IEnumerable<DtoTipoBankroll>>> TipoBankroll()
-        {
-            return _mapper.Map<List<DtoTipoBankroll>>(await _context.TiposBankrolls.ToListAsync());
-        }
-        // GET: api/UsuarioBankroll/Monedas
-        [HttpGet("Monedas")]
-        public async Task<ActionResult<IEnumerable<DtoMoneda>>> Monedas()
-        {
-            return _mapper.Map<List<DtoMoneda>>(await _context.Monedas.OrderBy(x=>x.Moneda1).ToListAsync());
-        }
-        #endregion
+      
     }
 }

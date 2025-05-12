@@ -15,7 +15,7 @@ public partial class RelUsuariosCasino
 
     public long EstatusUsuarioCasinoId { get; set; }
 
-    public int? CasinoId { get; set; }
+    public long? CasinoId { get; set; }
 
     [StringLength(150)]
     [Unicode(false)]
@@ -28,9 +28,16 @@ public partial class RelUsuariosCasino
     [Column(TypeName = "datetime")]
     public DateTime FechaRegistro { get; set; }
 
+    [ForeignKey("CasinoId")]
+    [InverseProperty("RelUsuariosCasinos")]
+    public virtual Casino? Casino { get; set; }
+
     [ForeignKey("EstatusUsuarioCasinoId")]
     [InverseProperty("RelUsuariosCasinos")]
     public virtual EstatusUsuariosCasino EstatusUsuarioCasino { get; set; } = null!;
+
+    [InverseProperty("UsuarioCasino")]
+    public virtual ICollection<RelApuesta> RelApuesta { get; set; } = new List<RelApuesta>();
 
     [ForeignKey("UsuarioId")]
     [InverseProperty("RelUsuariosCasinos")]

@@ -17,4 +17,7 @@ public partial class Casino
 
     [Unicode(false)]
     public string Icono { get; set; } = null!;
+
+    [InverseProperty("Casino")]
+    public virtual ICollection<RelUsuariosCasino> RelUsuariosCasinos { get; set; } = new List<RelUsuariosCasino>();
 }
