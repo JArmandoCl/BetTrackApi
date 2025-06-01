@@ -20,6 +20,8 @@ public partial class RelUsuarioTipster
     [Column(TypeName = "datetime")]
     public DateTime FechaRegistro { get; set; }
 
+    public bool? Estatus { get; set; }
+
     [InverseProperty("UsuarioTipster")]
     public virtual ICollection<RelApuesta> RelApuesta { get; set; } = new List<RelApuesta>();
 

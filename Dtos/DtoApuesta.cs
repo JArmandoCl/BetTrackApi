@@ -18,6 +18,7 @@
         public bool EsApuestaGratuita { get; set; }
         #region Extras
         public DtoDetalleApuesta DetalleApuesta { get; set; }
+        public DtoUsuarioCasino? UsuarioCasino { get; set; }
         #endregion
     }
     public class DtoDetalleApuesta

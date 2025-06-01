@@ -6,5 +6,6 @@
         public long UsuarioId { get; set; }
         public string NombreTipster { get; set; } = "";
         public DateTime FechaRegistro { get; set; }
+        public bool Estatus { get; set; }
     }
 }

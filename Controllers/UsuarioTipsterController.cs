@@ -31,7 +31,7 @@ namespace BetTrackApi.Controllers
         [HttpGet("ObtenerUsuarioTipsters/{usuarioId}")]
         public async Task<ActionResult<IEnumerable<DtoUsuarioTipster>>> ObtenerUsuarioTipsters(long usuarioId)
         {
-            return _mapper.Map<List<DtoUsuarioTipster>>(await _context.RelUsuarioTipsters.Where(x=>x.UsuarioId==usuarioId).ToListAsync());
+            return _mapper.Map<List<DtoUsuarioTipster>>(await _context.RelUsuarioTipsters.Where(x => x.UsuarioId == usuarioId && x.Estatus == true).ToListAsync());
         }
 
         // GET: api/UsuarioTipster/5

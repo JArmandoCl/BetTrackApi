@@ -31,7 +31,7 @@ namespace BetTrackApi.Controllers
         [HttpGet("ObtenerApuestas/{bankrollId}")]
         public async Task<ActionResult<IEnumerable<DtoApuesta>>> ObtenerApuestas(long bankrollId)
         {
-            return _mapper.Map<List<DtoApuesta>>(await _context.RelApuestas.Where(x => x.UsuarioBankrollId == bankrollId).Include(x => x.RelDetallesApuesta).ToListAsync());
+            return _mapper.Map<List<DtoApuesta>>(await _context.RelApuestas.Where(x => x.UsuarioBankrollId == bankrollId).Include(x => x.RelDetallesApuesta).Include(c=>c.UsuarioCasino).ToListAsync());
         }
 
         // GET: api/Apuesta/5

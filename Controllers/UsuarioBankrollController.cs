@@ -30,14 +30,14 @@ namespace BetTrackApi.Controllers
         [HttpGet("ObtenerBankrollsUsuario/{usuarioId}")]
         public async Task<ActionResult<IEnumerable<DtoUsuarioBankroll>>> ObtenerBankrollsUsuario(long usuarioId)
         {
-            return _mapper.Map<List<DtoUsuarioBankroll>>(await _context.RelUsuarioBankrolls.Where(x=>x.UsuarioId==usuarioId).ToListAsync());
+            return _mapper.Map<List<DtoUsuarioBankroll>>(await _context.RelUsuarioBankrolls.Where(x => x.UsuarioId == usuarioId && x.EstatusBankrollId == 1).ToListAsync());//Active-Activo
         }
 
         // GET: api/UsuarioBankroll/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DtoUsuarioBankroll>> ObtenerBankrollUsuario(long id)
         {
-            var relUsuarioBankroll = await _context.RelUsuarioBankrolls.Include(x=>x.TipoBankroll).Include(x=>x.FormatoCuota).Include(x=>x.Moneda).FirstOrDefaultAsync(x=>x.UsuarioBankrollId==id);
+            var relUsuarioBankroll = await _context.RelUsuarioBankrolls.Include(x => x.TipoBankroll).Include(x => x.FormatoCuota).Include(x => x.Moneda).FirstOrDefaultAsync(x => x.UsuarioBankrollId == id);
 
             if (relUsuarioBankroll == null)
             {
@@ -116,6 +116,6 @@ namespace BetTrackApi.Controllers
         {
             return _context.RelUsuarioBankrolls.Any(e => e.UsuarioBankrollId == id);
         }
-      
+
     }
 }
